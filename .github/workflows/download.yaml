@@ -22,7 +22,7 @@ jobs:
         echo "::set-output name=artifact_id::$ARTIFACT_ID"
     - name: Download
       run: |
-        curl -L -o artifact.zip -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \ "https://api.github.com/repos/upload-artifact/actions/artifacts/artifactid/zip"
+        curl -L -o artifact.zip -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \ "https://api.github.com/repos/upload-artifact/actions/artifacts/1333217032/zip"
         
       
      
