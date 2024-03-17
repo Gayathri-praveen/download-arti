@@ -15,7 +15,7 @@ jobs:
     - name: artifact-id
       id: artifact-id
       run: |
-        ARTIFACTS_URL="https://api.github.com/repos/upload-artifact/actions/runs/8316925130/artifacts"
+        ARTIFACTS_URL="https://api.github.com/repos/upload-artifact/actions/runs/8316925130/artifacts/1333217032"
         RESPONSE=$(curl -H "Authorization: token ${{ secrets.GIT_TOKEN }}" $ARTIFACTS_URL)
         ARTIFACT_ID=$(echo $RESPONSE | jq -r '.artifacts[0].id')
         echo "ARTIFACT ID: $ARTIFACT_ID"
