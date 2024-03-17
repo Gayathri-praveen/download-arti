@@ -13,13 +13,13 @@ jobs:
     - name: install jq
       run: sudo apt-get install jq
     - name: artifact-id
-      id: artifact-id
+      #id: artifact-id
       run: |
         ARTIFACTS_URL="https://api.github.com/repos/upload-artifact/actions/runs/github.event.workflow_run.id/artifacts"
         RESPONSE=$(curl -H "Authorization: token ${{ secrets.GIT_TOKEN }}" $ARTIFACTS_URL)
         ARTIFACT_ID=$(echo $RESPONSE | jq -r '.artifacts[0].id')
         echo "ARTIFACT ID: $ARTIFACT_ID"
-        echo "::set-output name=artifact_id::$ARTIFACT_ID"
+        #echo "::set-output name=artifact_id::$ARTIFACT_ID"
       # env: 
       #  GITHUB_TOKEN: ${{ github.token }} 
       #  MYID: ${{ steps.artifact-id-step.outputs.artifact-id }}
