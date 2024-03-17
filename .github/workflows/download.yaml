@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: install jq
+      run: sudo apt-get install jq
     - name: list
       id: list
       run: |
