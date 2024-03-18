@@ -12,25 +12,25 @@ jobs:
     steps:
     - name: install jq
       run: sudo apt-get install jq
-    - name: artifact-id
-      #id: artifact-id
-      run: |
-        #ARTIFACTS_URL="https://api.github.com/repos/upload-artifact/actions/runs/github.event.workflow_run.id/artifacts"
-        #RESPONSE=$(curl -H "Authorization: token ${{ secrets.GIT_TOKEN }}" $ARTIFACTS_URL)
-        curl -L \
-        #RESPONSE=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GIT_TOKEN }}" $ARTIFACTS_URL)
-          -H "Accept: application/vnd.github+json" \
-          -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \
-          -H "X-GitHub-Api-Version: 2022-11-28" \
-          https://api.github.com/repos/gayucharvi/upload-artifact/actions/runs/8317318063/artifacts
-        #ARTIFACT_ID=$(echo $RESPONSE | jq -r '.artifacts[0].id')
+    # - name: artifact-id
+    #   #id: artifact-id
+    #   run: |
+    #     #ARTIFACTS_URL="https://api.github.com/repos/upload-artifact/actions/runs/github.event.workflow_run.id/artifacts"
+    #     #RESPONSE=$(curl -H "Authorization: token ${{ secrets.GIT_TOKEN }}" $ARTIFACTS_URL)
+    #     curl -L \
+    #     #RESPONSE=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GIT_TOKEN }}" $ARTIFACTS_URL)
+    #       -H "Accept: application/vnd.github+json" \
+    #       -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \
+    #       -H "X-GitHub-Api-Version: 2022-11-28" \
+    #       https://api.github.com/repos/gayucharvi/upload-artifact/actions/runs/8317318063/artifacts
+    #     #ARTIFACT_ID=$(echo $RESPONSE | jq -r '.artifacts[0].id')
 
-        #echo "ARTIFACT ID: $ARTIFACT_ID"
-        #echo "::set-output name=artifact_id::$ARTIFACT_ID"
-      # env: 
-      #  GITHUB_TOKEN: ${{ github.token }} 
-      #  MYID: ${{ steps.artifact-id-step.outputs.artifact-id }}
-      #  MYURL: ${{ steps.artifact-id-step.outputs.artifact-url }}   
+    #     #echo "ARTIFACT ID: $ARTIFACT_ID"
+    #     #echo "::set-output name=artifact_id::$ARTIFACT_ID"
+    #   # env: 
+    #   #  GITHUB_TOKEN: ${{ github.token }} 
+    #   #  MYID: ${{ steps.artifact-id-step.outputs.artifact-id }}
+    #   #  MYURL: ${{ steps.artifact-id-step.outputs.artifact-url }}   
     
     - name: Download
       run: |
