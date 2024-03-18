@@ -1,28 +1,26 @@
-name: Download Artifact
+name: Download Artifact from Another Repository 
 
-on: 
+on:
   push:
     branches:
       - main
 
 jobs: 
   download-artifact: 
-    runs-on: ubuntu-latest 
-    steps: # Checkout is not strictly necessary for the API calls, but included for completeness 
-    - name: Checkout code 
-      uses: actions/checkout@v3 
-
-    - name: List Artifacts for a Specific Workflow Run
-      id: list-artifacts 
-      run: | 
-        ARTIFACTS_URL="https://api.github.com/repos/ {{ github.repository }}/actions/runs/{{ github.event.workflow_run.id }}/artifacts"
-        ARTIFACTS_RESPONSE=$(curl -s -H "Authorization: Bearer ${{ secrets.GIT_TOKEN }}" -H "Accept: application/vnd.github.v3+json" "$ARTIFACTS_URL") 
-        ARTIFACT_ID=$(echo "$ARTIFACTS_RESPONSE" | jq '.artifacts[] | select(.name=="Artifact-A-ubuntu-latest").id') 
-        echo "::set-output name=artifact_id::$ARTIFACT_ID" 
-        fail_on_error: true
-
-    - name: Download the Artifact 
-      if: steps.list-artifacts.outputs.artifact_id 
-      run: | 
-        DOWNLOAD_URL="https://api.github.com/repos/${{ github.repository }}/actions/artifacts/${{ steps.list-artifacts.outputs.artifact_id }}/zip" # The -L flag allows curl to follow redirects 
-        curl -L -o Artifact-A-ubuntu-latest.zip -H "Authorization: Bearer ${{ secrets.GIT_TOKEN }}" "$DOWNLOAD_URL"
+   runs-on: ubuntu-latest 
+   steps: 
+     - name: Download artifact from another repository 
+       env: 
+         PAT: ${{ secrets.GIT_TOKEN }} 
+       run: | # Replace these variables 
+         OWNER="gayucharvi" 
+         REPO="upload-artifact" 
+         ARTIFACT_ID="1333272553" 
+ # Use the GitHub API to download the artifact 
+     - name: download
+         curl \ 
+           -H "Authorization:token $PAT" \ 
+           -H "Accept:application/vnd.github.v3+json" \ 
+           -L "https://api.github.com/repos/$OWNER/$REPO/actions/artifacts/$ARTIFACT_ID/zip" \ -o artifact.zip 
+           
+ 
