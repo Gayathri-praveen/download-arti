@@ -1,7 +1,9 @@
 name: Download Artifact
 
 on: 
-  workflow_dispatch 
+  push:
+    branches:
+      - main
 
 jobs: 
   download-artifact: 
@@ -14,7 +16,7 @@ jobs:
       id: list-artifacts 
       run: | 
         ARTIFACTS_URL="https://api.github.com/repos/ {{ github.repository }}/actions/runs/{{ github.event.workflow_run.id }}/artifacts"
-        ARTIFACTS_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GIT_TOKEN }}" -H "Accept: application/vnd.github.v3+json" "$ARTIFACTS_URL") 
+        ARTIFACTS_RESPONSE=$(curl -s -H "Authorization: Bearer ${{ secrets.GIT_TOKEN }}" -H "Accept: application/vnd.github.v3+json" "$ARTIFACTS_URL") 
         ARTIFACT_ID=$(echo "$ARTIFACTS_RESPONSE" | jq '.artifacts[] | select(.name=="Artifact-A-ubuntu-latest").id') 
         echo "::set-output name=artifact_id::$ARTIFACT_ID" 
         fail_on_error: true
@@ -23,4 +25,4 @@ jobs:
       if: steps.list-artifacts.outputs.artifact_id 
       run: | 
         DOWNLOAD_URL="https://api.github.com/repos/${{ github.repository }}/actions/artifacts/${{ steps.list-artifacts.outputs.artifact_id }}/zip" # The -L flag allows curl to follow redirects 
-        curl -L -o Artifact-A-ubuntu-latest.zip -H "Authorization: token ${{ secrets.GIT_TOKEN }}" "$DOWNLOAD_URL"
+        curl -L -o Artifact-A-ubuntu-latest.zip -H "Authorization: Bearer ${{ secrets.GIT_TOKEN }}" "$DOWNLOAD_URL"
