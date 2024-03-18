@@ -11,14 +11,14 @@ jobs:
    steps: 
      - name: Download artifact repository 
        env: 
-         PAT: ${{ secrets.GIT_TOKEN }} 
-       run: | # Replace these variables 
+         PAT: ${{ secrets.GIT_TOKEN }}
+       run: | # Replace these variables
          OWNER="gayucharvi" 
          REPO="upload-artifact" 
          ARTIFACT_ID="1333272158"     
          curl \ 
-           -H "Authorization:token $PAT" \ 
-           -H "Accept:application/vnd.github.v3+json" \ 
+           -H "Authorization:token $PAT" \
+           -H "Accept:application/vnd.github.v3+json" \
            -L "https://api.github.com/repos/$OWNER/$REPO/actions/artifacts/$ARTIFACT_ID/zip" \ -o artifact.zip 
            
  
