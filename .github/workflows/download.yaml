@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest 
     steps: # Checkout is not strictly necessary for the API calls, but included for completeness 
     - name: Checkout code 
-      uses: actions/checkout@v2 
+      uses: actions/checkout@v3 
 
     - name: List Artifacts for a Specific Workflow Run
       id: list-artifacts 
@@ -17,6 +17,7 @@ jobs:
         ARTIFACTS_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github.v3+json" "$ARTIFACTS_URL") 
         ARTIFACT_ID=$(echo "$ARTIFACTS_RESPONSE" | jq '.artifacts[] | select(.name=="YOUR_ARTIFACT_NAME_HERE").id') 
         echo "::set-output name=artifact_id::$ARTIFACT_ID" 
+        fail_on_error: true
 
     - name: Download the Artifact 
       if: steps.list-artifacts.outputs.artifact_id 
