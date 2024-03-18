@@ -15,7 +15,7 @@ jobs:
        run: | # Replace these variables 
          OWNER="gayucharvi" 
          REPO="upload-artifact" 
-         ARTIFACT_ID="1333272553"     
+         ARTIFACT_ID="1333272158"     
          curl \ 
            -H "Authorization:token $PAT" \ 
            -H "Accept:application/vnd.github.v3+json" \ 
