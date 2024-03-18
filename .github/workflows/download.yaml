@@ -1,10 +1,9 @@
 name: Download Artifact
 
 on:
-  workflow_run:
-    workflows: ["upload-artifact"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 jobs:  
   run_on_workflow_a_success:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
