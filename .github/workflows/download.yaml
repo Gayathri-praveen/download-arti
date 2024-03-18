@@ -9,7 +9,7 @@ jobs:
   download-artifact: 
    runs-on: ubuntu-latest 
    steps: 
-     - name: Download artifact from another repository 
+     - name: Download artifact repository 
        env: 
          PAT: ${{ secrets.GIT_TOKEN }} 
        run: | # Replace these variables 
