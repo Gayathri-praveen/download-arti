@@ -1,4 +1,4 @@
-name: Download Artifact from Another Repository 
+name: Download Artifact
 
 on:
   push:
@@ -15,9 +15,7 @@ jobs:
        run: | # Replace these variables 
          OWNER="gayucharvi" 
          REPO="upload-artifact" 
-         ARTIFACT_ID="1333272553" 
- # Use the GitHub API to download the artifact 
-     - name: download
+         ARTIFACT_ID="1333272553"     
          curl \ 
            -H "Authorization:token $PAT" \ 
            -H "Accept:application/vnd.github.v3+json" \ 
